@@ -1,0 +1,17 @@
+﻿using System;
+using System.Reflection;
+using System.Windows.Forms;
+
+namespace ultimate.mailer
+{
+    public static class ControlExtensions
+    {
+        public static void DoubleBuffering(this Control control, bool enable)
+        {
+            if (control == null) throw new ArgumentNullException("control");
+
+            var method = typeof(Control).GetMethod("SetStyle", BindingFlags.Instance | BindingFlags.NonPublic);
+            method.Invoke(control, new object[] { ControlStyles.OptimizedDoubleBuffer, enable });
+        }
+    }
+}
